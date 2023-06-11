@@ -8,12 +8,14 @@ numpy = "*"
 pandas = "*"
 streamlit = "==0.87"
 scikit-learn = "==0.24.2"
-matplotlib.pyplot = "==3.7.1"
+matplotlib = "*"
 Pillow = "*"
 click = "<8"
 protobuf = "==3.20.1"
 
 [dev-packages]
+pytest = "*"
+
 
 [requires]
 python_version = "3.8"

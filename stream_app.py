@@ -68,7 +68,7 @@ def main():
         st.success('Churn: {0}, Risk Score: {1}'.format(output, output_prob))
     
     if add_selectbox == 'VizData':
-        import matplotlib.pyplot as plt
+        import matplotlib as plt
         df = pd.read_csv('dataset.csv')
         services = ['PhoneService', 'InternetService', 'TechSupport', 'StreamingTV']
         selected_service = st.selectbox("Churn reason:", services)
