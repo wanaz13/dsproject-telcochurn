@@ -1,7 +1,6 @@
 import pickle
 import streamlit as st
 import pandas as pd
-from PIL import Image
 model_file = 'model_C=1.0.bin'
 
 with open(model_file, 'rb') as f_in:
@@ -10,14 +9,11 @@ with open(model_file, 'rb') as f_in:
 
 def main():
 
-	image = Image.open('images/icone.png')
-	image2 = Image.open('images/image.png')
-	st.image(image,use_column_width=False)
+
 	add_selectbox = st.sidebar.selectbox(
 	"How would you like to predict?",
 	("Online", "Batch"))
 	st.sidebar.info('This app is created to predict Customer Churn')
-	st.sidebar.image(image2)
 	st.title("Predicting Customer Churn")
 	if add_selectbox == 'Online':
 		gender = st.selectbox('Gender:', ['male', 'female'])
