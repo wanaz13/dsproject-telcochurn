@@ -1,7 +1,7 @@
 import pickle
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as pt
 model_file = 'model_C=1.0.bin'
 
 with open(model_file, 'rb') as f_in:
@@ -77,11 +77,11 @@ def main():
 
 		# Plot the churn rate for the selected service
 			def churn_rate(service):
-				fig = plt.figure(figsize=(10, 6))
+				fig = pt.figure(figsize=(10, 6))
 				svc_types = df.groupby(service)['Churn'].value_counts(normalize=True).unstack()
-				svc_types.plot(kind='bar', stacked=True, ax=plt.gca())
-				plt.title(service)
-				plt.tight_layout()
+				svc_types.plot(kind='bar', stacked=True, ax=pt.gca())
+				pt.title(service)
+				pt.tight_layout()
 				st.pyplot(fig)
 
 			churn_rate(selected_service)
