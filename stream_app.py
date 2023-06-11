@@ -67,14 +67,23 @@ def main():
 			output = bool(churn)
 		st.success('Churn: {0}, Risk Score: {1}'.format(output, output_prob))
 	if add_selectbox == 'VizData':
-		file_upload = st.file_uploader("Upload csv file for predictions", type=["csv"])
-		if file_upload is not None:
-			data = pd.read_csv(file_upload)
-			X = dv.transform([data])
-			y_pred = model.predict_proba(X)[0, 1]
-			churn = y_pred >= 0.5
-			churn = bool(churn)
-			st.write(churn)
+		import matplotlib as plt
+  
+		df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
+		services = ['PhoneService', 'InternetService', 'TechSupport', 'StreamingTV']
+  
+		selected_service = st.selectbox("Churn reason:", services)
+  
+		def churn_rate(service):
+				fig = plt.figure(figsize=(10, 6))
+				svc_types = df.groupby(service)['Churn'].value_counts(normalize=True).unstack()
+				svc_types.plot(kind='bar', stacked=True, ax=plt.gca())
+				plt.title(service)
+				plt.tight_layout()
+				st.pyplot(fig)
+    
+		churn_rate(selected_service)
+
 
 if __name__ == '__main__':
 	main()
