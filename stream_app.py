@@ -1,6 +1,7 @@
 import pickle
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 from PIL import Image
 model_file = 'model_C=1.0.bin'
 
@@ -79,6 +80,24 @@ def main():
 			churn = y_pred >= 0.5
 			churn = bool(churn)
 			st.write(churn)
+	if add_selectbox == 'DATA VIZUALIZE':
+		
+			df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
+			# Define the services
+			services = ['PhoneService', 'InternetService', 'TechSupport', 'StreamingTV']
 
+		# Create a dropdown menu to select a service
+			selected_service = st.selectbox("Churn reason:", services)
+
+		# Plot the churn rate for the selected service
+			def churn_rate(service):
+				fig = plt.figure(figsize=(10, 6))
+				svc_types = df.groupby(service)['Churn'].value_counts(normalize=True).unstack()
+				svc_types.plot(kind='bar', stacked=True, ax=plt.gca())
+				plt.title(service)
+				plt.tight_layout()
+				st.pyplot(fig)
+
+			churn_rate(selected_service)
 if __name__ == '__main__':
 	main()
