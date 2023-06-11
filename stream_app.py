@@ -15,7 +15,7 @@ def main():
 	("Prediction", "VizData"))
 	st.sidebar.info('This app is created to predict Customer Churn')
 	st.title("Predicting Customer Churn")
-	if add_selectbox == 'Online':
+	if add_selectbox == 'Prediction':
 		gender = st.selectbox('Gender:', ['male', 'female'])
 		seniorcitizen= st.selectbox(' Customer is a senior citizen:', [0, 1])
 		partner= st.selectbox(' Customer has a partner:', ['yes', 'no'])
