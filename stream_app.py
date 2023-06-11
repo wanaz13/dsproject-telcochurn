@@ -1,7 +1,7 @@
 import pickle
 import streamlit as st
 import pandas as pd
-import matplotlib as plt
+from PIL import Image
 model_file = 'model_C=1.0.bin'
 
 with open(model_file, 'rb') as f_in:
@@ -10,14 +10,14 @@ with open(model_file, 'rb') as f_in:
 
 def main():
 
-	#image = Image.open('images/icone.png')
-	#image2 = Image.open('images/image.png')
-	#st.image(image,use_column_width=False)
+	image = Image.open('images/icone.png')
+	image2 = Image.open('images/image.png')
+	st.image(image,use_column_width=False)
 	add_selectbox = st.sidebar.selectbox(
 	"How would you like to predict?",
 	("Online", "Batch"))
 	st.sidebar.info('This app is created to predict Customer Churn')
-	#st.sidebar.image(image2)
+	st.sidebar.image(image2)
 	st.title("Predicting Customer Churn")
 	if add_selectbox == 'Online':
 		gender = st.selectbox('Gender:', ['male', 'female'])
@@ -63,7 +63,6 @@ def main():
 				"totalcharges": totalcharges
 			}
 
-		
 		if st.button("Predict"):
 			X = dv.transform([input_dict])
 			y_pred = model.predict_proba(X)[0, 1]
@@ -80,26 +79,6 @@ def main():
 			churn = y_pred >= 0.5
 			churn = bool(churn)
 			st.write(churn)
-		
-			df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
-			# Define the services
-			services = ['PhoneService', 'InternetService', 'TechSupport', 'StreamingTV']
-
-		# Create a dropdown menu to select a service
-			selected_service = st.selectbox("Churn reason:", services)
-
-		# Plot the churn rate for the selected service
-			def churn_rate(service):
-				fig = plt.figure(figsize=(10, 6))
-				svc_types = df.groupby(service)['Churn'].value_counts(normalize=True).unstack()
-				svc_types.plot(kind='bar', stacked=True, ax=plt.gca())
-				plt.title(service)
-				plt.tight_layout()
-				st.pyplot(fig)
-
-			churn_rate(selected_service)
-	
-	
 
 if __name__ == '__main__':
 	main()
