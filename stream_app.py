@@ -11,8 +11,8 @@ with open(model_file, 'rb') as f_in:
 
 def main():
 
-	image = Image.open('images/icone.png')
-	image2 = Image.open('images/image.png')
+	# image = Image.open('images/icone.png')
+	# image2 = Image.open('images/image.png')
 	st.image(image,use_column_width=False)
 	add_selectbox = st.sidebar.selectbox(
 	"How would you like to predict?",
