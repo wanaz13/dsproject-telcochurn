@@ -1,6 +1,7 @@
 import pickle
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 from PIL import Image
 model_file = 'model_C=1.0.bin'
 
@@ -70,15 +71,25 @@ def main():
 			output_prob = float(y_pred)
 			output = bool(churn)
 		st.success('Churn: {0}, Risk Score: {1}'.format(output, output_prob))
-	if add_selectbox == 'Batch':
-		file_upload = st.file_uploader("Upload csv file for predictions", type=["csv"])
-		if file_upload is not None:
-			data = pd.read_csv(file_upload)
-			X = dv.transform([data])
-			y_pred = model.predict_proba(X)[0, 1]
-			churn = y_pred >= 0.5
-			churn = bool(churn)
-			st.write(churn)
+	if add_selectbox == 'DATA VIZUALIZE':
+		
+			df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
+			# Define the services
+services = ['PhoneService', 'InternetService', 'TechSupport', 'StreamingTV']
+
+# Create a dropdown menu to select a service
+selected_service = st.selectbox("Churn reason:", services)
+
+# Plot the churn rate for the selected service
+def plot_churn_rate(service):
+    fig = plt.figure(figsize=(10, 6))
+    service_churn = df.groupby(service)['Churn'].value_counts(normalize=True).unstack()
+    service_churn.plot(kind='bar', stacked=True, ax=plt.gca())
+    plt.title(service)
+    plt.tight_layout()
+    st.pyplot(fig)
+
+plot_churn_rate(selected_service)
 
 if __name__ == '__main__':
 	main()
