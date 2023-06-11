@@ -71,28 +71,30 @@ def main():
 			output_prob = float(y_pred)
 			output = bool(churn)
 		st.success('Churn: {0}, Risk Score: {1}'.format(output, output_prob))
-		#if add_selectbox == 'DATA VIZUALIZE':
+		if add_selectbox == 'DATA VIZUALIZE':
 		
-		#	df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
-		#	# Define the services
-		#	services = ['PhoneService', 'InternetService', 'TechSupport', 'StreamingTV']
+			df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
+			# Define the services
+			services = ['PhoneService', 'InternetService', 'TechSupport', 'StreamingTV']
 
-		## Create a dropdown menu to select a service
-		#	selected_service = st.selectbox("Churn reason:", services)
+		# Create a dropdown menu to select a service
+			selected_service = st.selectbox("Churn reason:", services)
 
-		## Plot the churn rate for the selected service
-		#	def churn_rate(service):
-		#		fig = plt.figure(figsize=(10, 6))
-		#		svc_types = df.groupby(service)['Churn'].value_counts(normalize=True).unstack()
-		#		svc_types.plot(kind='bar', stacked=True, ax=plt.gca())
-		#		plt.title(service)
-		#		plt.tight_layout()
-		#		st.pyplot(fig)
+		# Plot the churn rate for the selected service
+			def churn_rate(service):
+				fig = plt.figure(figsize=(10, 6))
+				svc_types = df.groupby(service)['Churn'].value_counts(normalize=True).unstack()
+				svc_types.plot(kind='bar', stacked=True, ax=plt.gca())
+				plt.title(service)
+				plt.tight_layout()
+				st.pyplot(fig)
 
-		#	churn_rate(selected_service)
+			churn_rate(selected_service)
 
 
    		    
 
 
+if __name__ == '__main__':
+	main()
   		 
