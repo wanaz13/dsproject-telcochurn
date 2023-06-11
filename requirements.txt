@@ -1,4 +1,4 @@
 scikit-learn==0.24.2
 streamlit
 pandas
-matplotlib.pyplot
+matplotlib.pyplot==3.7.1
