@@ -63,6 +63,7 @@ def main():
 				"totalcharges": totalcharges
 			}
 
+		
 		if st.button("Predict"):
 			X = dv.transform([input_dict])
 			y_pred = model.predict_proba(X)[0, 1]
@@ -70,8 +71,15 @@ def main():
 			output_prob = float(y_pred)
 			output = bool(churn)
 		st.success('Churn: {0}, Risk Score: {1}'.format(output, output_prob))
-
-		if add_selectbox == 'DATA VIZUALIZE':
+	if add_selectbox == 'Batch':
+		file_upload = st.file_uploader("Upload csv file for predictions", type=["csv"])
+		if file_upload is not None:
+			data = pd.read_csv(file_upload)
+			X = dv.transform([data])
+			y_pred = model.predict_proba(X)[0, 1]
+			churn = y_pred >= 0.5
+			churn = bool(churn)
+			st.write(churn)
 		
 			df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
 			# Define the services
