@@ -17,7 +17,7 @@ def main():
 	"How would you like to predict?",
 	("Online", "Batch"))
 	st.sidebar.info('This app is created to predict Customer Churn')
-	st.sidebar.image(image2)
+	#st.sidebar.image(image2)
 	st.title("Predicting Customer Churn")
 	if add_selectbox == 'Online':
 		gender = st.selectbox('Gender:', ['male', 'female'])
