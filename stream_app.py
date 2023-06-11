@@ -1,7 +1,7 @@
 import pickle
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import matplotlib as plt
 model_file = 'model_C=1.0.bin'
 
 with open(model_file, 'rb') as f_in:
