@@ -1,6 +1,7 @@
 import pickle
 import streamlit as st
 import pandas as pd
+#import matplotlib as pl
 model_file = 'model_C=1.0.bin'
 
 with open(model_file, 'rb') as f_in:
@@ -67,7 +68,7 @@ def main():
 			output = bool(churn)
 		st.success('Churn: {0}, Risk Score: {1}'.format(output, output_prob))
 	if add_selectbox == 'VizData':
-		import matplotlib as pl
+		#import matplotlib as pl
   
 		df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
 		services = ['PhoneService', 'InternetService', 'TechSupport', 'StreamingTV']
