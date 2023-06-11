@@ -11,9 +11,9 @@ def main():
 
 
 	add_selectbox = st.sidebar.selectbox(
-	"How would you like to predict?",
+	"Would you like to predict or see the data visualization",
 	("Prediction", "VizData"))
-	st.sidebar.info('This app is created to predict Customer Churn')
+	st.sidebar.info('Click here to see more detail about customer churn')
 	st.title("Predicting Customer Churn")
 	if add_selectbox == 'Prediction':
 		gender = st.selectbox('Gender:', ['male', 'female'])
