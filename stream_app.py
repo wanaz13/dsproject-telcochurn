@@ -12,7 +12,7 @@ def main():
 
 	add_selectbox = st.sidebar.selectbox(
 	"How would you like to predict?",
-	("Online", "VizData"))
+	("Prediction", "VizData"))
 	st.sidebar.info('This app is created to predict Customer Churn')
 	st.title("Predicting Customer Churn")
 	if add_selectbox == 'Online':
