@@ -2,8 +2,6 @@ import pickle
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-
-#from PIL import Image
 model_file = 'model_C=1.0.bin'
 
 with open(model_file, 'rb') as f_in:
@@ -72,8 +70,8 @@ def main():
 			output_prob = float(y_pred)
 			output = bool(churn)
 		st.success('Churn: {0}, Risk Score: {1}'.format(output, output_prob))
-	
-	if add_selectbox == 'DATA VIZUALIZE':
+
+		if add_selectbox == 'DATA VIZUALIZE':
 		
 			df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
 			# Define the services
@@ -92,6 +90,8 @@ def main():
 				st.pyplot(fig)
 
 			churn_rate(selected_service)
+	
+	
 
 if __name__ == '__main__':
 	main()
