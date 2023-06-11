@@ -1,7 +1,7 @@
 import pickle
 import streamlit as st
 import pandas as pd
-#from PIL import Image
+import matplotlib.pyplot as plt
 model_file = 'model_C=1.0.bin'
 
 with open(model_file, 'rb') as f_in:
@@ -10,14 +10,10 @@ with open(model_file, 'rb') as f_in:
 
 def main():
 
-	#image = Image.open('images/icone.png')
-	#image2 = Image.open('images/image.png')
-	#st.image(image,use_column_width=False)
 	add_selectbox = st.sidebar.selectbox(
 	"How would you like to predict?",
 	("Online", "Batch"))
 	st.sidebar.info('This app is created to predict Customer Churn')
-	#st.sidebar.image(image2)
 	st.title("Predicting Customer Churn")
 	if add_selectbox == 'Online':
 		gender = st.selectbox('Gender:', ['male', 'female'])
@@ -70,15 +66,25 @@ def main():
 			output_prob = float(y_pred)
 			output = bool(churn)
 		st.success('Churn: {0}, Risk Score: {1}'.format(output, output_prob))
-	if add_selectbox == 'Batch':
-		file_upload = st.file_uploader("Upload csv file for predictions", type=["csv"])
-		if file_upload is not None:
-			data = pd.read_csv(file_upload)
-			X = dv.transform([data])
-			y_pred = model.predict_proba(X)[0, 1]
-			churn = y_pred >= 0.5
-			churn = bool(churn)
-			st.write(churn)
+	if add_selectbox == 'DATA VIZUALIZE':
+		
+			df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
+			# Define the services
+			services = ['PhoneService', 'InternetService', 'TechSupport', 'StreamingTV']
+
+		# Create a dropdown menu to select a service
+			selected_service = st.selectbox("Churn reason:", services)
+
+		# Plot the churn rate for the selected service
+			def churn_rate(service):
+				fig = plt.figure(figsize=(10, 6))
+				svc_types = df.groupby(service)['Churn'].value_counts(normalize=True).unstack()
+				svc_types.plot(kind='bar', stacked=True, ax=plt.gca())
+				plt.title(service)
+				plt.tight_layout()
+				st.pyplot(fig)
+
+			churn_rate(selected_service)
 
 if __name__ == '__main__':
 	main()
