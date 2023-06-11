@@ -59,7 +59,7 @@ def main():
 				"totalcharges": totalcharges
 			}
 
-		if st.button("Predict"):
+		if st.button("Prediction"):
 			X = dv.transform([input_dict])
 			y_pred = model.predict_proba(X)[0, 1]
 			churn = y_pred >= 0.5
