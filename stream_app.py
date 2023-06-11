@@ -68,7 +68,7 @@ def main():
         st.success('Churn: {0}, Risk Score: {1}'.format(output, output_prob))
     
     if add_selectbox == 'VizData':
-        df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
+        df = pd.read_csv('dataset.csv')
         services = ['PhoneService', 'InternetService', 'TechSupport', 'StreamingTV']
         selected_service = st.selectbox("Churn reason:", services)
 
