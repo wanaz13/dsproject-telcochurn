@@ -21,7 +21,7 @@ output_file = f'model_C={C}.bin'
 
 # data preparation
 
-df = pd.read_csv('dataset.csv')
+df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
 
 df.columns = df.columns.str.lower().str.replace(' ', '_')
 
